@@ -15,10 +15,13 @@
               <p>{{item.username}}</p>
               <p>{{item.content}}</p>
             </div>
-            <div class="friendOne-c">
-              <img :src="item.trendimg" alt="">
-              <span>{{item.trendcontent}}</span>
-            </div>
+            <a href="https://www.baidu.com">
+              <div class="friendOne-c" @click="gocontent()">
+                <img :src="item.trendimg" alt="">
+                <span>{{item.trendcontent}}</span>
+              </div>
+            </a>
+           
             <div class="friendOne-parise">
               <div class="pariseOne" @click="parise(index)">
                 <img src="../../static/parise.png" alt=""><span>{{item.parisenum}}</span>
@@ -26,7 +29,7 @@
               <div class="pariseOne">
                 <img src="../../static/commment.png" alt=""><span>评论</span>
               </div>
-              <div class="pariseOne">
+              <div class="pariseOne" v-if="item.isself == 0">
                 <img src="../../static/delete.png" alt=""><span>删除</span>
               </div>
             </div>
@@ -108,14 +111,17 @@ export default {
             },
           ]
         }
-        
-      ]
+      ],
+      
     }
   },
   mounted(){
   
   },
   methods:{
+    gocontent(){
+      Navigator
+    },
     getMorecomment(){
       var that = this;
       that.num = 50;
@@ -135,7 +141,7 @@ export default {
         that.trends[index].parisestate = 1;
         console.log(that.trends[index].parisestate);
 
-      }else if(that.trend[index].parisestate == 1){
+      }else{
         that.trends[index].parisenum = that.trends[index].parisenum+1;
         that.trends[index].parisestate = 0;
         console.log(that.trends[index].parisestate);
